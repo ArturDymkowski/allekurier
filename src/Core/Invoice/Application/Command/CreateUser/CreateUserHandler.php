@@ -28,7 +28,7 @@ class CreateUserHandler
             $this->mailer->send($command->email, 'Aktywacja konta', 'Zarejestrowano konto w systemie. Aktywacja konta trwa do 24h');
         }
         else {
-            throw new UserExistException('Użytkownik z tym emailem już istnieje!');
+            throw new UserExistException('Użytkownik z tym emailem już istnieje');
         }
     }
 }
