@@ -17,4 +17,6 @@ interface UserRepositoryInterface
     public function flush(): void;
 
     public function userExist(string $email): bool;
+
+    public function getInactiveUsers(): array;
 }
