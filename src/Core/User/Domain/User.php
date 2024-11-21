@@ -45,4 +45,10 @@ class User
     {
         return $this->active;
     }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
+        return $this;
+    }
 }
