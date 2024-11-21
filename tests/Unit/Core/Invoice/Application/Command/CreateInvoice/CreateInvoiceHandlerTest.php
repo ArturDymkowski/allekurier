@@ -12,6 +12,7 @@ use App\Core\User\Domain\Repository\UserRepositoryInterface;
 use App\Core\User\Domain\User;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 class CreateInvoiceHandlerTest extends TestCase
 {
@@ -73,5 +74,18 @@ class CreateInvoiceHandlerTest extends TestCase
         $this->expectException(InvoiceException::class);
 
         $this->handler->__invoke((new CreateInvoiceCommand('test@test.pl', -5)));
+    }
+
+    public function test_create_invoice_with_inactive_user(): void
+    {
+        $user = $this->createMock(User::class);
+
+        $this->userRepository->expects(self::once())
+            ->method('getByEmail')
+            ->willReturn($user);
+
+        $this->expectException(InvoiceException::class);
+
+        $this->handler->__invoke((new CreateInvoiceCommand('test@test.pl', 12500)));
     }
 }

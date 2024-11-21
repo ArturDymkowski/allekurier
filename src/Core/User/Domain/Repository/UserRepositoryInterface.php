@@ -2,6 +2,7 @@
 
 namespace App\Core\User\Domain\Repository;
 
+use App\Core\User\Domain\Exception\UserExistException;
 use App\Core\User\Domain\Exception\UserNotFoundException;
 use App\Core\User\Domain\User;
 
@@ -16,6 +17,9 @@ interface UserRepositoryInterface
 
     public function flush(): void;
 
+    /**
+     * @throws UserExistException
+     */
     public function userExist(string $email): bool;
 
     public function getInactiveUsers(): array;
